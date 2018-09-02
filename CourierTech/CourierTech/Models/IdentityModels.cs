@@ -36,18 +36,24 @@ namespace CourierTech.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
+
+        public int Age { get; set; }
+        public string _Document { get; set; }
+
+
+        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
         {
-            // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+                                               // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType
+             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            
             // Agregar aquí notificaciones personalizadas de usuario
             return userIdentity;
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,
-                                                          int, CustomUserLogin, CustomUserRole, CustomUserClaim>
-
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, CustomRole,int, 
+                                                         CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public ApplicationDbContext()
             : base("CourierTech")

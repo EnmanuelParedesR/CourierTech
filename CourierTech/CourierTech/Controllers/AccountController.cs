@@ -139,6 +139,7 @@ namespace CourierTech.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+           
             return View();
         }
 
@@ -151,7 +152,7 @@ namespace CourierTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {UserName = model.Email, Email = model.Email, Age = Convert.ToInt32(model.Age), _Document = Convert.ToString(model.Document)  };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -288,7 +289,7 @@ namespace CourierTech.Controllers
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
+            if (userId == 0)
             {
                 return View("Error");
             }
