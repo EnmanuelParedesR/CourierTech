@@ -79,6 +79,17 @@ namespace CourierTech.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Cedula o Pasaporte")]
+        public string Document { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Edad")]
+        public int Age { get; set; }
     }
 
     public class ResetPasswordViewModel
